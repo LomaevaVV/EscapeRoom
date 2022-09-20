@@ -1,5 +1,5 @@
 import * as S from './booking-modal.styled';
-import { ReactComponent as IconClose } from 'assets/img/icon-close.svg';
+import { ReactComponent as IconClose } from '../../../../assets/img/icon-close.svg';
 
 const BookingModal = () => (
   <S.BlockLayer>
@@ -48,7 +48,7 @@ const BookingModal = () => (
             required
           />
         </S.BookingField>
-        <S.BookingSubmit type="submit">Отправить заявку</S.BookingSubmit>
+        <S.BookingSubmit >Отправить заявку</S.BookingSubmit>
         <S.BookingCheckboxWrapper>
           <S.BookingCheckboxInput
             type="checkbox"

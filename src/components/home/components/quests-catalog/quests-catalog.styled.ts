@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'components/common/common';
+import { Link } from 'react-router-dom';
 
 const Tabs = styled.ul`
   display: flex;
@@ -61,8 +61,7 @@ const TabBtn = styled.button.attrs({ type: 'button' })`
     border-bottom: 2px solid ${({ theme }) => theme.color.tangerine};
   }
 
-  ${({ isActive }) =>
-    isActive &&
+  ${() =>
     css`
       span {
         border-bottom: 2px solid ${({ theme }) => theme.color.tangerine};

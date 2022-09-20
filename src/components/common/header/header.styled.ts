@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Container, Link as RouterLink } from 'components/common/common';
+import { Link as RouterLink } from 'react-router-dom';
+import Container from '../container/container';
 
 const StyledHeader = styled.header`
   z-index: 5;
@@ -13,7 +14,8 @@ const StyledHeader = styled.header`
   background-color: rgba(26, 26, 26, 0.9);
 `;
 
-const HeaderWrapper = styled(Container)`
+const HeaderWrapper
+ = styled(Container)`
   display: flex;
   align-items: flex-start;
   min-height: 74px;
@@ -75,8 +77,8 @@ const Link = styled(RouterLink)`
 
   color: ${({ theme }) => theme.color.whiteSmoke};
 
-  ${({ $isActiveLink }) =>
-    $isActiveLink &&
+  ${() =>
+
     css`
       color: ${({ theme }) => theme.color.tangerine};
     `}
