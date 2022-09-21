@@ -48,7 +48,7 @@ const BookingModal = () => (
             required
           />
         </S.BookingField>
-        <S.BookingSubmit >Отправить заявку</S.BookingSubmit>
+        <S.BookingSubmit type="submit">Отправить заявку</S.BookingSubmit>
         <S.BookingCheckboxWrapper>
           <S.BookingCheckboxInput
             type="checkbox"

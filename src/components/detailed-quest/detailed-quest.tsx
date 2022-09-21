@@ -8,14 +8,19 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchQuestAction } from '../../store/api-actions';
 import { getQuest, getQuestFetchStatus } from '../../store/data-quest/selectors';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FetchStatus, GenreList } from '../../const';
 import Loader from '../common/loader/loader';
 import NotFoundPage from '../not-found/not-found-page';
-// import { StringDecoder } from 'string_decoder';
-// import { BookingModal } from './components/components';
+import { BookingModal } from './components/components';
 
 export default function DetailedQuest(): JSX.Element {
+  const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
+
+  const onBookingBtnClick = () => {
+    setIsBookingModalOpened(true);
+  };
+
   const QuestParams: {id: string} = useParams();
   const id = QuestParams.id;
   window.console.log(id);
@@ -47,12 +52,6 @@ export default function DetailedQuest(): JSX.Element {
   const genre = GenreList.filter((genre) => genre.genreEng === currentQuest.type)
 
   window.console.log(currentQuest?.coverImg)
-
-  // const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
-
-  // const onBookingBtnClick = () => {
-  //   setIsBookingModalOpened(true);
-  // };
 
   return (
     <MainLayout>
@@ -96,13 +95,13 @@ export default function DetailedQuest(): JSX.Element {
               помочь другим, разобраться что произошло и выбраться из комнаты?
             </S.QuestDescription>
 
-            <S.QuestBookingBtn >
+            <S.QuestBookingBtn onClick={onBookingBtnClick}>
               Забронировать
             </S.QuestBookingBtn>
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {/* {isBookingModalOpened && <BookingModal />} */}
+        {isBookingModalOpened && <BookingModal />}
       </S.Main>
     </MainLayout>
   );

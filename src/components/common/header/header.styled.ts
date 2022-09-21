@@ -14,8 +14,7 @@ const StyledHeader = styled.header`
   background-color: rgba(26, 26, 26, 0.9);
 `;
 
-const HeaderWrapper
- = styled(Container)`
+const HeaderWrapper = styled(Container)`
   display: flex;
   align-items: flex-start;
   min-height: 74px;
@@ -66,7 +65,11 @@ const LinkItem = styled.li`
   }
 `;
 
-const Link = styled(RouterLink)`
+interface LinkProps {
+  $isActiveLink?: boolean
+}
+
+const Link = styled(RouterLink)<LinkProps>`
   display: block;
   max-width: 100px;
   font-size: ${({ theme }) => theme.font.semibase};
@@ -77,8 +80,8 @@ const Link = styled(RouterLink)`
 
   color: ${({ theme }) => theme.color.whiteSmoke};
 
-  ${() =>
-
+  ${({ $isActiveLink }) =>
+    $isActiveLink &&
     css`
       color: ${({ theme }) => theme.color.tangerine};
     `}

@@ -13,7 +13,7 @@ const Header = () => (
       <S.Navigation>
         <S.Links>
           <S.LinkItem>
-            <S.Link to={AppRoute.Home}>
+            <S.Link $isActiveLink={true} to={AppRoute.Home}>
               Квесты
             </S.Link>
           </S.LinkItem>
