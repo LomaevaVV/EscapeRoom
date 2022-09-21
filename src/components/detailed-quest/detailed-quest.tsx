@@ -1,42 +1,85 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import MainLayout from '../common/main-layout/main-layout';
 import { ReactComponent as IconClock } from '../../assets/img/icon-clock.svg';
 import { ReactComponent as IconPerson } from '../../assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from '../../assets/img/icon-puzzle.svg';
 import * as S from './detailed-quest.styled';
-import { BookingModal } from './components/components';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchQuestAction } from '../../store/api-actions';
+import { getQuest, getQuestFetchStatus } from '../../store/data-quest/selectors';
+import { useEffect, useRef } from 'react';
+import { FetchStatus, GenreList } from '../../const';
+import Loader from '../common/loader/loader';
+import NotFoundPage from '../not-found/not-found-page';
+// import { StringDecoder } from 'string_decoder';
+// import { BookingModal } from './components/components';
 
-const DetailedQuest = () => {
-  const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
+export default function DetailedQuest(): JSX.Element {
+  const QuestParams: {id: string} = useParams();
+  const id = QuestParams.id;
+  window.console.log(id);
+  const dispatch = useAppDispatch();
+  const isRenderedRef = useRef<boolean>(false);
 
-  const onBookingBtnClick = () => {
-    setIsBookingModalOpened(true);
-  };
+  useEffect(() => {
+    if (!isRenderedRef.current) {
+      dispatch(fetchQuestAction(Number(id)));
+      isRenderedRef.current = true;
+    }
+  }, [dispatch, id]);
+
+  const currentQuest = useAppSelector(getQuest);
+  const questFetchStatus = useAppSelector(getQuestFetchStatus);
+
+  if (
+    questFetchStatus === FetchStatus.Idle ||
+    questFetchStatus === FetchStatus.Loading
+  ) {
+    return <Loader />;
+  }
+
+  if (!currentQuest || questFetchStatus === FetchStatus.Rejected) {
+    return <NotFoundPage />;
+
+  }
+
+  const genre = GenreList.filter((genre) => genre.genreEng === currentQuest.type)
+
+  window.console.log(currentQuest?.coverImg)
+
+  // const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
+
+  // const onBookingBtnClick = () => {
+  //   setIsBookingModalOpened(true);
+  // };
 
   return (
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src="img/cover-maniac.jpg"
-          alt="Квест Маньяк"
+          src={currentQuest?.coverImg}
+          alt={`квест ${currentQuest?.title}`}
           width="1366"
           height="768"
         />
         <S.PageContentWrapper>
           <S.PageHeading>
-            <S.PageTitle>Маньяк</S.PageTitle>
-            <S.PageSubtitle>приключения</S.PageSubtitle>
+            <S.PageTitle>{currentQuest?.title}</S.PageTitle>
+            <S.PageSubtitle>{genre[0].genreRus}</S.PageSubtitle>
           </S.PageHeading>
 
           <S.PageDescription>
             <S.Features>
               <S.FeaturesItem>
                 <IconClock width="20" height="20" />
-                <S.FeatureTitle>90 мин</S.FeatureTitle>
+                <S.FeatureTitle>{currentQuest?.duration} мин</S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPerson width="19" height="24" />
-                <S.FeatureTitle>3–6 чел</S.FeatureTitle>
+                <S.FeatureTitle>
+                  {`${currentQuest?.peopleCount[0]}-${currentQuest?.peopleCount[1]} чел`}
+                </S.FeatureTitle>
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPuzzle width="24" height="24" />
@@ -59,10 +102,8 @@ const DetailedQuest = () => {
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {isBookingModalOpened && <BookingModal />}
+        {/* {isBookingModalOpened && <BookingModal />} */}
       </S.Main>
     </MainLayout>
   );
 };
-
-export default DetailedQuest;

@@ -6,7 +6,7 @@ export type Quest = {
   coverImg: string;
   type: string;
   level: string;
-  peopleCount: number;
+  peopleCount: number[];
   duration: number;
 };
 
