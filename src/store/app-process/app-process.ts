@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 
 type AppProcess = {
-  genre: string | undefined
+  genre: string
 };
 
 const initialState: AppProcess = {
-  genre: undefined
+  genre: 'all-quests'
 };
 
 export const appProcess = createSlice({

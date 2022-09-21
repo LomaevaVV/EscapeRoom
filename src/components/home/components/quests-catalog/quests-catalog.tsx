@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../../hooks/index';
+import { useAppSelector, useAppDispatch } from '../../../../hooks/index';
 import { ReactComponent as IconAllQuests } from '../../../../assets/img/icon-all-quests.svg';
 import { ReactComponent as IconAdventures } from '../../../../assets/img/icon-adventures.svg';
 import { ReactComponent as IconHorrors } from '../../../../assets/img/icon-horrors.svg';
@@ -8,12 +8,15 @@ import { ReactComponent as IconScifi } from '../../../../assets/img/icon-scifi.s
 import { ReactComponent as IconPerson } from '../../../../assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from '../../../../assets/img/icon-puzzle.svg';
 import * as S from './quests-catalog.styled';
-import { getQuests } from '../../../../store/data-quests/selectors';
+import { selectCurrentQuests } from '../../../../store/data-quests/selectors';
 import { AppRoute } from '../../../../const';
 import { generatePath } from 'react-router-dom';
 import { GenreList } from '../../../../const';
+import { changeGenre } from '../../../../store/app-process/app-process';
+import { getGenre } from '../../../../store/app-process/selectors';
 
 export default function QuestsCatalog(): JSX.Element {
+  const dispatch = useAppDispatch();
 
   const getGenreIcon = (genre: string) => {
     switch(genre) {
@@ -34,8 +37,10 @@ export default function QuestsCatalog(): JSX.Element {
     }
   }
 
-  const currentQuests = useAppSelector(getQuests);
-  window.console.log(currentQuests);
+  const currentGenre = useAppSelector(getGenre);
+  const currentQuests = useAppSelector(selectCurrentQuests);
+
+  window.console.log(currentGenre);
 
   return (
     <>
@@ -43,7 +48,7 @@ export default function QuestsCatalog(): JSX.Element {
       {GenreList.map((genre) =>
         (
           <S.TabItem key={genre.genreEng}>
-            <S.TabBtn >
+            <S.TabBtn onClick={() => dispatch(changeGenre(genre.genreEng))}>
               {getGenreIcon(genre.genreEng)}
               <S.TabTitle>{genre.genreRus}</S.TabTitle>
             </S.TabBtn>

@@ -4,7 +4,6 @@ import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
 import { Quests, Quest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
-import { Order } from '../types/order';
 // import { toast } from 'react-toastify';
 
 export const fetchQuestsAction = createAsyncThunk<Quests, undefined, {
