@@ -4,6 +4,7 @@ import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
 import { Quests, Quest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
+import { Order, OrderData } from '../types/order';
 // import { toast } from 'react-toastify';
 
 export const fetchQuestsAction = createAsyncThunk<Quests, undefined, {
@@ -11,7 +12,7 @@ export const fetchQuestsAction = createAsyncThunk<Quests, undefined, {
   state: State,
   extra: AxiosInstance
 }>(
-  'data/fetchOffers',
+  'data/fetchQuests',
   async (_arg, {extra: api}) => {
     try {
       const {data} = await api.get<Quests>(APIRoute.Quests);
@@ -31,7 +32,7 @@ export const fetchQuestAction = createAsyncThunk<Quest, number, {
   state: State,
   extra: AxiosInstance
 }>(
-  'data/fetchOffer',
+  'data/fetchQuest',
   async (questId, {extra: api}) => {
     try {
       const {data} = await api.get<Quest>(generatePath(APIRoute.Quest, {id: String(questId)}));
@@ -45,26 +46,28 @@ export const fetchQuestAction = createAsyncThunk<Quest, number, {
   });
 
 
-// export const postOrderAction = createAsyncThunk<Order, {
-//   dispatch: AppDispatch,
-//   state: State,
-//   extra: AxiosInstance
-// }>(
-//   'data/post ReviewComment',
-//   async ({comment, rating, resetData}, {extra: api}) => {
-//     try {
-//       const {data} = await api.post<Order>(APIRoute.Orders,
-//         {comment, rating}
-//       );
+export const postOrderAction = createAsyncThunk<Order, OrderData, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/post OrderComment',
+  async ({name, phone, people, isLegal, id, closeModal}, {dispatch, extra: api}) => {
+    const peopleCount = Number(people);
+    try {
+      const {data} = await api.post<Order>(APIRoute.Orders,
+        {name, phone, peopleCount, isLegal}
+      );
 
-//       resetData();
-//       return data;
-//     } catch(e) {
-//       // toast.error('Unable to to post a review', {
-//       //   position: toast.POSITION.TOP_CENTER,
-//       // });
+      window.console.log(id)
+      closeModal();
+      return data;
+    } catch(e) {
+      // toast.error('Unable to to post a review', {
+      //   position: toast.POSITION.TOP_CENTER,
+      // });
 
-//       throw e;
-//     }
-//   },
-// );
+      throw e;
+    }
+  },
+);

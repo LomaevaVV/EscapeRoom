@@ -21,6 +21,10 @@ export default function DetailedQuest(): JSX.Element {
     setIsBookingModalOpened(true);
   };
 
+  const onModalCloseBtnClick = () => {
+    setIsBookingModalOpened(false);
+  };
+
   const QuestParams: {id: string} = useParams();
   const id = QuestParams.id;
   window.console.log(id);
@@ -101,7 +105,7 @@ export default function DetailedQuest(): JSX.Element {
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {isBookingModalOpened && <BookingModal />}
+        {isBookingModalOpened && <BookingModal id={id} onModalCloseBtnClick={onModalCloseBtnClick}/>}
       </S.Main>
     </MainLayout>
   );

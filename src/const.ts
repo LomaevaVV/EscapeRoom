@@ -1,7 +1,7 @@
 export enum AppRoute {
   Home = '/',
   Contacts = '/contacts',
-  Quest = '/quests/:id',
+  Quest = '/detailed-quest/:id',
   Error = '/error'
 }
 
