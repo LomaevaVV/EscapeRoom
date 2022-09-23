@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchQuestAction } from '../../store/api-actions';
 import { getQuest, getQuestFetchStatus } from '../../store/data-quest/selectors';
 import { useEffect, useRef, useState } from 'react';
-import { FetchStatus, GenreList } from '../../const';
+import { FetchStatus, GenreList, HOST_URL } from '../../const';
 import Loader from '../common/loader/loader';
 import NotFoundPage from '../not-found/not-found-page';
 import { BookingModal } from './components/components';
@@ -59,7 +59,7 @@ export default function DetailedQuest(): JSX.Element {
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={`http://localhost:3000/${currentQuest.coverImg}`}
+          src={`${HOST_URL}/${currentQuest.coverImg}`}
           alt={`квест ${currentQuest?.title}`}
           width="1366"
           height="768"

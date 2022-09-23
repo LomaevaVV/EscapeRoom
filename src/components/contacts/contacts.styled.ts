@@ -87,6 +87,13 @@ const ContactsMapImage = styled.img`
   display: block;
 `;
 
+const ContactsMapIframe = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+`;
+
 export {
   Main,
   ContentWrapper,
@@ -99,4 +106,5 @@ export {
   ContactLink,
   ContactsMap,
   ContactsMapImage,
+  ContactsMapIframe
 };

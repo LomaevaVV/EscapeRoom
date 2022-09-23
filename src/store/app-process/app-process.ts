@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { GenreList, NameSpace } from '../../const';
 
 type AppProcess = {
   genre: string
 };
 
 const initialState: AppProcess = {
-  genre: 'all-quests'
+  genre: GenreList[0].genreEng
 };
 
 export const appProcess = createSlice({

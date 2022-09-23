@@ -60,3 +60,5 @@ export const enum QuestLevel {
   medium = 'средний',
   hard = 'сложный'
 }
+
+export const HOST_URL = 'http://localhost:3000'

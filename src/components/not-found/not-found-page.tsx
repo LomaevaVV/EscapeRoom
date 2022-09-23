@@ -1,22 +1,33 @@
-import {Link} from 'react-router-dom';
+import MainLayout from '../common/main-layout/main-layout';
+import PageTitle from '../common/page-title/page-title';
+import PageSubtext from '../common/page-subtext/page-subtext';
+import * as S from './not-found-page.styled';
+import { AppRoute } from '../../const';
+import { redirectToRoute } from '../../store/action';
+import { useAppDispatch } from '../../hooks';
 
 export default function NotFoundPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const onBtnClick = () => {
+    dispatch(redirectToRoute(AppRoute.Home));
+  }
+
   return (
+    <MainLayout>
+      <S.Main>
+        <S.ContentWrapper>
+        <S.PageHeading>
+          <PageTitle>404</PageTitle>
+          <PageSubtext>Страница не найдена</PageSubtext>
+        </S.PageHeading>
 
-    <main className="page__main page__main--notfound">
-        <title>Page not found</title>
+        <S.NotFoundPageBtn onClick={onBtnClick}>
+          Вернуться на главную страницу
+        </S.NotFoundPageBtn>
 
-        <div className="page__not-found-container container">
-          <section className='{styles.notfound}'>
-            <h1 className='{styles.title}'>Page not found</h1>
-            <h2 className='{styles.title}'>404</h2>
-            <span className='{styles.description}'>{'The link you followed may be broken, or the page have been removed or it\'s temporarily unavailable.'}</span>
-            <h3>
-              <Link className='{styles.button}' to="/#">Return to the main page</Link>
-            </h3>
-          </section>
-        </div>
-      </main>
-
+        </S.ContentWrapper>
+      </S.Main>
+    </MainLayout>
   );
 }

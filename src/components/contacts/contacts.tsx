@@ -43,9 +43,8 @@ const Contacts = () => (
           </S.ContactsList>
 
           <S.ContactsMap>
-            <S.ContactsMapImage
-              src={contactsMap}
-              alt="мы находимся по адресу Санкт-Петербург, Набережная реки Карповка, д 5"
+            <S.ContactsMapIframe
+              src="https://yandex.ru/map-widget/v1/-/CCUVj6HnlC"
               width="649"
               height="336"
             />
