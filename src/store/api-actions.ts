@@ -59,7 +59,6 @@ export const postOrderAction = createAsyncThunk<Order, OrderData, {
         {name, phone, peopleCount, isLegal}
       );
 
-      window.console.log(id)
       closeModal();
       return data;
     } catch(e) {

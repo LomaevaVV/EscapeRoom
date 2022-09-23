@@ -40,7 +40,7 @@ const PageTitle = styled.h1`
   letter-spacing: -0.03em;
   color: ${({ theme }) => theme.color.white};
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+
 `;
 
 const PageSubtitle = styled.p`

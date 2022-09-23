@@ -27,7 +27,7 @@ export default function DetailedQuest(): JSX.Element {
 
   const QuestParams: {id: string} = useParams();
   const id = QuestParams.id;
-  window.console.log(id);
+
   const dispatch = useAppDispatch();
   const isRenderedRef = useRef<boolean>(false);
 
@@ -55,13 +55,11 @@ export default function DetailedQuest(): JSX.Element {
 
   const genre = GenreList.filter((genre) => genre.genreEng === currentQuest.type)
 
-  window.console.log(currentQuest?.coverImg)
-
   return (
     <MainLayout>
       <S.Main>
         <S.PageImage
-          src={currentQuest?.coverImg}
+          src={`http://localhost:3000/${currentQuest.coverImg}`}
           alt={`квест ${currentQuest?.title}`}
           width="1366"
           height="768"

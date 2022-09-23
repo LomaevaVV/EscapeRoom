@@ -18,6 +18,9 @@ import { getGenre } from '../../../../store/app-process/selectors';
 export default function QuestsCatalog(): JSX.Element {
   const dispatch = useAppDispatch();
 
+  const currentGenre = useAppSelector(getGenre);
+  const currentQuests = useAppSelector(selectCurrentQuests);
+
   const getGenreIcon = (genre: string) => {
     switch(genre) {
       case 'all-quests':
@@ -37,18 +40,12 @@ export default function QuestsCatalog(): JSX.Element {
     }
   }
 
-  const currentGenre = useAppSelector(getGenre);
-  const currentQuests = useAppSelector(selectCurrentQuests);
-
-  window.console.log(currentGenre);
-
   return (
     <>
       <S.Tabs>
-      {GenreList.map((genre) =>
-        (
+      {GenreList.map((genre) => (
           <S.TabItem key={genre.genreEng}>
-            <S.TabBtn onClick={() => dispatch(changeGenre(genre.genreEng))}>
+            <S.TabBtn onClick={() => dispatch(changeGenre(genre.genreEng))} isActive={genre.genreEng === currentGenre} >
               {getGenreIcon(genre.genreEng)}
               <S.TabTitle>{genre.genreRus}</S.TabTitle>
             </S.TabBtn>

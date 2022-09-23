@@ -36,8 +36,11 @@ const TabItem = styled.li`
   }
 `;
 
+interface TabBtnProps {
+  isActive?: boolean
+}
 
-const TabBtn = styled.button.attrs({ type: 'button'})`
+const TabBtn = styled.button.attrs({ type: 'button'})<TabBtnProps>`
   display: flex;
   align-items: center;
   padding: 0;
@@ -62,7 +65,8 @@ const TabBtn = styled.button.attrs({ type: 'button'})`
     border-bottom: 2px solid ${({ theme }) => theme.color.tangerine};
   }
 
-  ${() =>
+  ${({ isActive }) =>
+    isActive &&
     css`
       span {
         border-bottom: 2px solid ${({ theme }) => theme.color.tangerine};
