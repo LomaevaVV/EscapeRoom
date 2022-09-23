@@ -11,7 +11,7 @@ import * as S from './quests-catalog.styled';
 import { selectCurrentQuests } from '../../../../store/data-quests/selectors';
 import { AppRoute } from '../../../../const';
 import { generatePath } from 'react-router-dom';
-import { GenreList } from '../../../../const';
+import { Genres } from '../../../../const';
 import { changeGenre } from '../../../../store/app-process/app-process';
 import { getGenre } from '../../../../store/app-process/selectors';
 
@@ -43,7 +43,7 @@ export default function QuestsCatalog(): JSX.Element {
   return (
     <>
       <S.Tabs>
-      {GenreList.map((genre) => (
+      {Genres.map((genre) => (
           <S.TabItem key={genre.genreEng}>
             <S.TabBtn onClick={() => dispatch(changeGenre(genre.genreEng))} isActive={genre.genreEng === currentGenre} >
               {getGenreIcon(genre.genreEng)}

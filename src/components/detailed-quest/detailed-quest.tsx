@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchQuestAction } from '../../store/api-actions';
 import { getQuest, getQuestFetchStatus } from '../../store/data-quest/selectors';
 import { useEffect, useRef, useState } from 'react';
-import { FetchStatus, GenreList, HOST_URL } from '../../const';
+import { FetchStatus, Genres, HOST_URL } from '../../const';
 import Loader from '../common/loader/loader';
 import NotFoundPage from '../not-found/not-found-page';
 import { BookingModal } from './components/components';
@@ -53,7 +53,7 @@ export default function DetailedQuest(): JSX.Element {
 
   }
 
-  const genre = GenreList.filter((genre) => genre.genreEng === currentQuest.type)
+  const genre = Genres.filter((genre) => genre.genreEng === currentQuest.type)
 
   return (
     <MainLayout>

@@ -11,10 +11,7 @@ export const APIRoute = {
   Quest: '/quests/:id'
 } as const;
 
-export const GenreList: {
-  genreEng: string,
-  genreRus: string
-}[] = [
+export const Genres = [
   {
     genreEng: 'all-quests',
     genreRus: 'Все квесты'
@@ -39,7 +36,7 @@ export const GenreList: {
     genreEng: 'sci-fi',
     genreRus: 'Sci-fi'
   }
-]
+] as const;
 
 export enum NameSpace {
   DataQuests = 'QUESTS',

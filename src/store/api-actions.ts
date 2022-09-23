@@ -5,7 +5,7 @@ import { APIRoute } from '../const';
 import { Quests, Quest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
 import { Order, OrderData } from '../types/order';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const fetchQuestsAction = createAsyncThunk<Quests, undefined, {
   dispatch: AppDispatch,
@@ -19,9 +19,9 @@ export const fetchQuestsAction = createAsyncThunk<Quests, undefined, {
 
       return data;
     } catch(e) {
-      // toast.error('Quests loading error', {
-      //   position: toast.POSITION.TOP_CENTER,
-      // });
+      toast.error('Quests loading error', {
+        position: toast.POSITION.TOP_CENTER,
+      });
 
       throw e;
     }
@@ -38,9 +38,9 @@ export const fetchQuestAction = createAsyncThunk<Quest, number, {
       const {data} = await api.get<Quest>(generatePath(APIRoute.Quest, {id: String(questId)}));
       return data;
     } catch(e) {
-      // toast.error('Offer details loading error', {
-      //   position: toast.POSITION.TOP_CENTER,
-      // });
+      toast.error('Quest details loading error', {
+        position: toast.POSITION.TOP_CENTER,
+      });
       throw e;
     }
   });
@@ -59,12 +59,17 @@ export const postOrderAction = createAsyncThunk<Order, OrderData, {
         {name, phone, peopleCount, isLegal}
       );
 
+      toast.success('Заявка на бронирование успешно отправлена', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
       closeModal();
+
       return data;
     } catch(e) {
-      // toast.error('Unable to to post a review', {
-      //   position: toast.POSITION.TOP_CENTER,
-      // });
+      toast.error('Unable to post a order', {
+        position: toast.POSITION.TOP_CENTER,
+      });
 
       throw e;
     }

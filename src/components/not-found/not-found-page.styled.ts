@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Heading } from '../common/page-heading/page-heading';
 import contactsBg from '../../assets/img/contacts-bg.jpg';
 import Button from '../common/button/button';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Main = styled.main`
   display: flex;
@@ -37,9 +38,21 @@ const NotFoundPageBtn = styled(Button).attrs({ type: 'button' })`
   margin-left: 2px;
 `;
 
+const Link = styled(RouterLink)`
+  display: block;
+  font-size: ${({ theme }) => theme.font.semibase};
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  color: ${({ theme }) => theme.color.whiteSmoke};
+`;
+
 export {
   Main,
   ContentWrapper,
   PageHeading,
-  NotFoundPageBtn
+  NotFoundPageBtn,
+  Link
 };

@@ -10,11 +10,16 @@ import Home from '../home/home';
 import { appTheme } from './common';
 import * as S from './app.styled';
 import { AppRoute } from '../../const';
+import { createBrowserHistory } from "history";
+import NotFoundPage from '../not-found/not-found-page';
 
-const App = () => (
+const App = () => {
+  const customHistory = createBrowserHistory();
+
+  return (
   <ThemeProvider theme={appTheme}>
     <S.GlobalStyle />
-    <Router>
+    <Router >
       <Switch>
         <Route exact path={AppRoute.Quest}>
           <DetailedQuest />
@@ -22,12 +27,15 @@ const App = () => (
         <Route exact path={AppRoute.Contacts}>
           <Contacts />
         </Route>
-        <Route path={AppRoute.Home}>
+        <Route exact path={AppRoute.Home}>
           <Home />
+        </Route>
+        <Route exact path="*">
+          <NotFoundPage />
         </Route>
       </Switch>
     </Router>
   </ThemeProvider>
-);
+)};
 
 export default App;

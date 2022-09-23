@@ -3,6 +3,7 @@ import { ReactComponent as IconClose } from '../../../../assets/img/icon-close.s
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch } from '../../../../hooks';
 import { postOrderAction } from '../../../../store/api-actions';
+import { toast } from 'react-toastify';
 
 type BookingModalProps = {
   id: String
@@ -48,7 +49,9 @@ export default function BookingModal({id, onModalCloseBtnClick}: BookingModalPro
       };
       dispatch(postOrderAction(orderToPost));
     } else {
-      window.console.log('что-то пошло не так')
+      toast.warn('Проверьте правильность заполнения полей. Телефон должен содержать 10 цифр', {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
 
