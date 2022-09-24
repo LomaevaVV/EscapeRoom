@@ -1,7 +1,6 @@
 import MainLayout from '../common/main-layout/main-layout';
 import PageTitle from '../common/page-title/page-title';
 import PageSubtext from '../common/page-subtext/page-subtext';
-import contactsMap from '../../assets/img/contacts-map.jpg';
 import * as S from './contacts.styled';
 
 const Contacts = () => (
