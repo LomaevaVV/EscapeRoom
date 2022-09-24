@@ -9,9 +9,8 @@ import { ReactComponent as IconPerson } from '../../../../assets/img/icon-person
 import { ReactComponent as IconPuzzle } from '../../../../assets/img/icon-puzzle.svg';
 import * as S from './quests-catalog.styled';
 import { selectCurrentQuests } from '../../../../store/data-quests/selectors';
-import { AppRoute } from '../../../../const';
+import { AppRoute, Genres, QuestLevel } from '../../../../const';
 import { generatePath } from 'react-router-dom';
-import { Genres } from '../../../../const';
 import { changeGenre } from '../../../../store/app-process/app-process';
 import { getGenre } from '../../../../store/app-process/selectors';
 
@@ -43,11 +42,11 @@ export default function QuestsCatalog(): JSX.Element {
   return (
     <>
       <S.Tabs>
-      {Genres.map((genre) => (
-          <S.TabItem key={genre.genreEng}>
-            <S.TabBtn onClick={() => dispatch(changeGenre(genre.genreEng))} isActive={genre.genreEng === currentGenre} >
-              {getGenreIcon(genre.genreEng)}
-              <S.TabTitle>{genre.genreRus}</S.TabTitle>
+      {Object.keys(Genres).map((genreKey) => (
+          <S.TabItem key={genreKey}>
+            <S.TabBtn onClick={() => dispatch(changeGenre(genreKey))} isActive={String(genreKey) === currentGenre} >
+              {getGenreIcon(genreKey)}
+              <S.TabTitle>{Genres[genreKey]}</S.TabTitle>
             </S.TabBtn>
           </S.TabItem>
         ))}
@@ -76,7 +75,7 @@ export default function QuestsCatalog(): JSX.Element {
                       </S.QuestFeatureItem>
                       <S.QuestFeatureItem>
                         <IconPuzzle />
-                        {quest.level}
+                        {QuestLevel[quest.level]}
                       </S.QuestFeatureItem>
                     </S.QuestFeatures>
                   </S.QuestContent>

@@ -67,7 +67,7 @@ export const postOrderAction = createAsyncThunk<Order, OrderData, {
 
       return data;
     } catch(e) {
-      toast.error('Unable to post a order', {
+      toast.error('Unable to post an order', {
         position: toast.POSITION.TOP_CENTER,
       });
 

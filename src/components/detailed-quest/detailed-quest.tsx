@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchQuestAction } from '../../store/api-actions';
 import { getQuest, getQuestFetchStatus } from '../../store/data-quest/selectors';
 import { useEffect, useRef, useState } from 'react';
-import { FetchStatus, Genres, HOST_URL } from '../../const';
+import { FetchStatus, Genres, HOST_URL, QuestLevel } from '../../const';
 import Loader from '../common/loader/loader';
 import NotFoundPage from '../not-found/not-found-page';
 import { BookingModal } from './components/components';
@@ -50,10 +50,7 @@ export default function DetailedQuest(): JSX.Element {
 
   if (!currentQuest || questFetchStatus === FetchStatus.Rejected) {
     return <NotFoundPage />;
-
   }
-
-  const genre = Genres.filter((genre) => genre.genreEng === currentQuest.type)
 
   return (
     <MainLayout>
@@ -67,7 +64,7 @@ export default function DetailedQuest(): JSX.Element {
         <S.PageContentWrapper>
           <S.PageHeading>
             <S.PageTitle>{currentQuest?.title}</S.PageTitle>
-            <S.PageSubtitle>{genre[0].genreRus}</S.PageSubtitle>
+            <S.PageSubtitle>{Genres[currentQuest.type]}</S.PageSubtitle>
           </S.PageHeading>
 
           <S.PageDescription>
@@ -84,7 +81,7 @@ export default function DetailedQuest(): JSX.Element {
               </S.FeaturesItem>
               <S.FeaturesItem>
                 <IconPuzzle width="24" height="24" />
-                <S.FeatureTitle>средний</S.FeatureTitle>
+                <S.FeatureTitle>{QuestLevel[currentQuest.level]}</S.FeatureTitle>
               </S.FeaturesItem>
             </S.Features>
 

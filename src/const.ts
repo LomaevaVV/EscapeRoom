@@ -11,32 +11,18 @@ export const APIRoute = {
   Quest: '/quests/:id'
 } as const;
 
-export const Genres = [
-  {
-    genreEng: 'all-quests',
-    genreRus: 'Все квесты'
-  },
-  {
-    genreEng: 'adventures',
-    genreRus: 'Приключения'
-  },
-  {
-    genreEng: 'horror',
-    genreRus: 'Ужасы'
-  },
-  {
-    genreEng: 'mystic',
-    genreRus: 'Мистика'
-  },
-  {
-    genreEng: 'detective',
-    genreRus: 'Детектив'
-  },
-  {
-    genreEng: 'sci-fi',
-    genreRus: 'Sci-fi'
-  }
-] as const;
+export const Genres: {
+  [key: string]: string
+} = {
+  'all-quests': 'Все квесты',
+  'adventures': 'Приключения',
+  'horror': 'Ужасы',
+  'mystic': 'Мистика',
+  'detective': 'Детектив',
+  'sci-fi': 'Sci-fi'
+} as const;
+
+export const DEFAULT_GENRE = 'all-quests';
 
 export enum NameSpace {
   DataQuests = 'QUESTS',
@@ -52,10 +38,12 @@ export const enum FetchStatus {
   Rejected = 'REJECTED',
 }
 
-export const enum QuestLevel {
-  easy = 'легкий',
-  medium = 'средний',
-  hard = 'сложный'
-}
+export const QuestLevel: {
+  [key: string]: string,
+} = {
+    easy: 'легкий',
+    medium: 'средний',
+    hard: 'сложный'
+} as const;
 
 export const HOST_URL = 'http://localhost:3000'

@@ -86,7 +86,6 @@ const Link = styled(RouterLink)<LinkProps>`
       color: ${({ theme }) => theme.color.tangerine};
     `}
 
-  &:focus,
   &:hover {
     color: ${({ theme }) => theme.color.tangerine};
   }
