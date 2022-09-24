@@ -1,4 +1,5 @@
-import { useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import logo from '../../../assets/img/logo.svg';
 import { AppRoute } from '../../../const';
 import * as S from './header.styled';
@@ -6,10 +7,16 @@ import * as S from './header.styled';
 const Header = () => {
   const { path } = useRouteMatch()
 
+  const handleLinkClick = () => {
+    toast.warn('Страницы "Новичкам", "Отзывы", "Акции" находятся в разработке', {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+
   return (
     <S.StyledHeader>
       <S.HeaderWrapper>
-        <S.Logo>
+        <S.Logo to={AppRoute.Home}>
           <S.Image src={logo} alt="Логотип Escape Room" width="134" height="50" />
         </S.Logo>
 
@@ -26,15 +33,30 @@ const Header = () => {
             </S.LinkItem>
 
             <S.LinkItem>
-              <S.Link to="#">Новичкам</S.Link>
+              <S.Link
+                onClick={handleLinkClick}
+                to="#"
+              >
+                Новичкам
+              </S.Link>
             </S.LinkItem>
 
             <S.LinkItem>
-              <S.Link to="#">Отзывы</S.Link>
+              <S.Link
+                onClick={handleLinkClick}
+                to="#"
+              >
+                Отзывы
+              </S.Link>
             </S.LinkItem>
 
             <S.LinkItem>
-              <S.Link to="#">Акции</S.Link>
+              <S.Link
+                onClick={handleLinkClick}
+                to="#"
+              >
+                Акции
+              </S.Link>
             </S.LinkItem>
 
             <S.LinkItem>

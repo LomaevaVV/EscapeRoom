@@ -24,7 +24,7 @@ const HeaderWrapper = styled(Container)`
   padding-left: 32px;
 `;
 
-const Logo = styled.a`
+const Logo = styled(RouterLink)`
   margin-right: 250px;
 
   @media (max-width: 1300px) {

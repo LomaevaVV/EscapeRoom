@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../common/button/button';
 import Container from '../common/container/container';
 
 const Main = styled(Container)`
@@ -30,4 +31,9 @@ const Main = styled(Container)`
   }
 `;
 
-export { Main };
+const NotQuestsBtn = styled(Button).attrs({ type: 'button' })`
+  margin-left: 2px;
+  max-width: 500px;
+`;
+
+export { Main, NotQuestsBtn };

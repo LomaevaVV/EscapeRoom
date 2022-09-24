@@ -8,6 +8,9 @@ import { FetchStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getQuestsFetchStatus } from '../../store/data-quests/selectors';
 import Loader from '../common/loader/loader';
+import { fetchQuestsAction } from '../../store/api-actions';
+import { store } from '../../store';
+
 
 const HomePage = () => {
   const questsFetchStatus = useAppSelector(getQuestsFetchStatus);
@@ -26,7 +29,12 @@ const HomePage = () => {
           <PageTitle>Выберите тематику</PageTitle>
           <PageSubtext>квесты в Санкт-Петербурге</PageSubtext>
         </Heading>
-        <QuestsCatalog />
+        {questsFetchStatus === FetchStatus.Rejected
+          ? <S.NotQuestsBtn onClick={() => {store.dispatch(fetchQuestsAction());}}>
+              Попробовать загрузить квесты еще раз
+            </S.NotQuestsBtn>
+          : <QuestsCatalog />
+        }
       </S.Main>
     </MainLayout>
   )
