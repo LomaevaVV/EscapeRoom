@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import { APIRoute } from '../const';
 import { Quests, Quest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
-import { Order, OrderData } from '../types/order';
+import { OrderData } from '../types/order';
 import { toast } from 'react-toastify';
 
 export const fetchQuestsAction = createAsyncThunk<Quests, undefined, {
@@ -46,16 +46,16 @@ export const fetchQuestAction = createAsyncThunk<Quest, number, {
   });
 
 
-export const postOrderAction = createAsyncThunk<Order, OrderData, {
+export const postOrderAction = createAsyncThunk<void, OrderData, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'data/post OrderComment',
-  async ({name, phone, people, isLegal, id, closeModal}, {dispatch, extra: api}) => {
+  async ({name, phone, people, isLegal, closeModal}, {dispatch, extra: api}) => {
     const peopleCount = Number(people);
     try {
-      const {data} = await api.post<Order>(APIRoute.Orders,
+      await api.post(APIRoute.Orders,
         {name, phone, peopleCount, isLegal}
       );
 
@@ -64,8 +64,6 @@ export const postOrderAction = createAsyncThunk<Order, OrderData, {
       });
 
       closeModal();
-
-      return data;
     } catch(e) {
       toast.error('Unable to post an order', {
         position: toast.POSITION.TOP_CENTER,

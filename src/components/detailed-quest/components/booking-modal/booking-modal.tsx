@@ -1,16 +1,17 @@
 import * as S from './booking-modal.styled';
 import { ReactComponent as IconClose } from '../../../../assets/img/icon-close.svg';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '../../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { postOrderAction } from '../../../../store/api-actions';
 import { toast } from 'react-toastify';
+import { getOrderPostStatus } from '../../../../store/data-order/selectors';
+import { FetchStatus } from '../../../../const';
 
 type BookingModalProps = {
-  id: String
-  onModalCloseBtnClick: () => void;
+  onClick: () => void;
 }
 
-export default function BookingModal({id, onModalCloseBtnClick}: BookingModalProps): JSX.Element {
+export default function BookingModal({onClick}: BookingModalProps): JSX.Element {
   const [orderData, setOrderData] = useState({
     name: '',
     phone: '',
@@ -18,6 +19,8 @@ export default function BookingModal({id, onModalCloseBtnClick}: BookingModalPro
   });
 
   const dispatch = useAppDispatch();
+  const orderPostStatus = useAppSelector(getOrderPostStatus);
+  const isOrderSubmiting = orderPostStatus === FetchStatus.Loading;
 
   const handleInputChange = (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -43,9 +46,8 @@ export default function BookingModal({id, onModalCloseBtnClick}: BookingModalPro
     if (validateTelNumber(orderData.phone)) {
       const orderToPost = {
         ...orderData,
-        id: id,
         isLegal: true,
-        closeModal: onModalCloseBtnClick
+        closeModal: onClick
       };
       dispatch(postOrderAction(orderToPost));
     } else {
@@ -58,7 +60,7 @@ export default function BookingModal({id, onModalCloseBtnClick}: BookingModalPro
   return (
     <S.BlockLayer>
       <S.Modal>
-        <S.ModalCloseBtn onClick={onModalCloseBtnClick}>
+        <S.ModalCloseBtn onClick={onClick}>
           <IconClose width="16" height="16" />
           <S.ModalCloseLabel>Закрыть окно</S.ModalCloseLabel>
         </S.ModalCloseBtn>
@@ -104,7 +106,9 @@ export default function BookingModal({id, onModalCloseBtnClick}: BookingModalPro
               required
             />
           </S.BookingField>
-          <S.BookingSubmit type="submit">Отправить заявку</S.BookingSubmit>
+          <S.BookingSubmit type="submit">
+            {isOrderSubmiting ? 'Заявка отправляется' : 'Отправить заявку'}
+          </S.BookingSubmit>
           <S.BookingCheckboxWrapper>
             <S.BookingCheckboxInput
               type="checkbox"

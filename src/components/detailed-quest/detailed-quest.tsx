@@ -17,11 +17,11 @@ import { BookingModal } from './components/components';
 export default function DetailedQuest(): JSX.Element {
   const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
 
-  const onBookingBtnClick = () => {
+  const handleBookingBtnClick = () => {
     setIsBookingModalOpened(true);
   };
 
-  const onModalCloseBtnClick = () => {
+  const handleCloseBtnClick = () => {
     setIsBookingModalOpened(false);
   };
 
@@ -94,13 +94,13 @@ export default function DetailedQuest(): JSX.Element {
               помочь другим, разобраться что произошло и выбраться из комнаты?
             </S.QuestDescription>
 
-            <S.QuestBookingBtn onClick={onBookingBtnClick}>
+            <S.QuestBookingBtn onClick={handleBookingBtnClick}>
               Забронировать
             </S.QuestBookingBtn>
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {isBookingModalOpened && <BookingModal id={id} onModalCloseBtnClick={onModalCloseBtnClick}/>}
+        {isBookingModalOpened && <BookingModal onClick={handleCloseBtnClick}/>}
       </S.Main>
     </MainLayout>
   );

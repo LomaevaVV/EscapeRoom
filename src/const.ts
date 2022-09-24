@@ -20,7 +20,7 @@ export const Genres: {
   'mystic': 'Мистика',
   'detective': 'Детектив',
   'sci-fi': 'Sci-fi'
-} as const;
+}
 
 export const DEFAULT_GENRE = 'all-quests';
 
@@ -44,6 +44,6 @@ export const QuestLevel: {
     easy: 'легкий',
     medium: 'средний',
     hard: 'сложный'
-} as const;
+}
 
 export const HOST_URL = 'http://localhost:3000'

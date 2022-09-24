@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, FetchStatus } from '../../const';
+import { postOrderAction } from '../api-actions';
 // import { postOrderAction } from '../api-actions';
 
 export type DataReviews = {
@@ -15,15 +16,15 @@ export const dataOrder = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    // builder
-      // .addCase(postOrderAction.pending, (state) => {
-      //   state.orderPostStatus = FetchStatus.Loading;
-      // })
-      // .addCase(postOrderAction.fulfilled, (state, action) => {
-      //   state.orderPostStatus = FetchStatus.Success;
-      // })
-      // .addCase(postOrderAction.rejected, (state) => {
-      //   state.orderPostStatus = FetchStatus.Rejected;
-      // });
+    builder
+      .addCase(postOrderAction.pending, (state) => {
+        state.orderPostStatus = FetchStatus.Loading;
+      })
+      .addCase(postOrderAction.fulfilled, (state, action) => {
+        state.orderPostStatus = FetchStatus.Success;
+      })
+      .addCase(postOrderAction.rejected, (state) => {
+        state.orderPostStatus = FetchStatus.Rejected;
+      });
   }
 });

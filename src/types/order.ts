@@ -10,6 +10,5 @@ export type OrderData = {
   people: number;
   phone: string;
   isLegal: boolean;
-  id: String;
   closeModal: () => void
 };
