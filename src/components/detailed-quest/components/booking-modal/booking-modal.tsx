@@ -35,7 +35,7 @@ export default function BookingModal({onClick}: BookingModalProps): JSX.Element 
   };
 
   const validateTelNumber = (phone: string) => {
-    const regExpPhone = /\d{10}/;
+    const regExpPhone = /^[\d\- ]{10}$/;
 
     return !!(phone.match(regExpPhone));
   };
